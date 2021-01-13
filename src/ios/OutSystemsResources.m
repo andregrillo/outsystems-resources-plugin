@@ -27,16 +27,16 @@
         BOOL fileExists = [fileManager fileExistsAtPath:filePath];
         
         if (fileExists) {
-                [fileManager copyItemAtPath:filePath toPath:docDirFilePath error:&error];
-                if (error) {
-                    NSLog(@"ERROR: Error on copying file: %@\nfrom path: %@\ntoPath: %@", error, filePath, docDirFilePath);
-                    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.localizedDescription];
-                } else {
-                    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:file];
-                }
+            [fileManager copyItemAtPath:filePath toPath:docDirFilePath error:&error];
+            if (error) {
+                NSLog(@"ERROR: Error on copying file: %@\nfrom path: %@\ntoPath: %@", error, filePath, docDirFilePath);
+                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.localizedDescription];
+            } else {
+                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:file];
+            }
         } else {
-	            NSLog(@"ERROR: File does not exist");
-	            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"ERROR: File does not exist"];
+            NSLog(@"ERROR: File does not exist");
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"ERROR: File does not exist"];
         }
     } else {
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"ERROR: A file name must be set as a parameter"];
