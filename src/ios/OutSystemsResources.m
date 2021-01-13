@@ -17,36 +17,29 @@
     
     if (file != nil && [file length] > 0) {
         
-        NSString *fileExt = [file pathExtension];
-        NSString *fileName = [file stringByDeletingPathExtension];
+        NSString *appFolderPath = [[NSBundle mainBundle] resourcePath];
+        NSString *filePath = [appFolderPath stringByAppendingString:[NSString stringWithFormat:@"/www/%@",file]];
         NSFileManager *fileManager = [NSFileManager defaultManager];
         NSError *error;
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *documentsDirectory = [paths objectAtIndex:0];
         NSString *docDirFilePath = [documentsDirectory stringByAppendingPathComponent:file];
-        BOOL fileExists = [fileManager fileExistsAtPath:docDirFilePath];
+        BOOL fileExists = [fileManager fileExistsAtPath:filePath];
         
         if (fileExists) {
-            NSString *resourcePath = [[NSBundle mainBundle] pathForResource:fileName ofType:fileExt];
-            if (resourcePath != nil && [resourcePath length] > 0) {
-                [fileManager copyItemAtPath:resourcePath toPath:docDirFilePath error:&error];
+                [fileManager copyItemAtPath:filePath toPath:docDirFilePath error:&error];
                 if (error) {
-                    NSLog(@"ERROR: Error on copying file: %@\nfrom path: %@\ntoPath: %@", error, resourcePath, docDirFilePath);
+                    NSLog(@"ERROR: Error on copying file: %@\nfrom path: %@\ntoPath: %@", error, filePath, docDirFilePath);
                     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.localizedDescription];
                 } else {
                     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:file];
                 }
-            } else {
-                NSLog(@"ERROR: Invalid file name or file already exists");
-                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"ERROR: Invalid file name or file already exists"];
-            }
         } else {
-            NSLog(@"ERROR: File does not exist");
-            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"ERROR: File does not exist"];
+	            NSLog(@"ERROR: File does not exist");
+	            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"ERROR: File does not exist"];
         }
     } else {
-    	NSLog(@"ERROR: Invalid file name");
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"ERROR: File does not exist"];
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"ERROR: A file name must be set as a parameter"];
     }
     
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
