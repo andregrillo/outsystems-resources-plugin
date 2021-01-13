@@ -32,7 +32,7 @@
 	            [fileManager copyItemAtPath:resourcePath toPath:docDirFilePath error:&error];
 	            if (error) {
 	                NSLog(@"Error on copying file: %@\nfrom path: %@\ntoPath: %@", error, resourcePath, docDirFilePath);
-	                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error];
+	                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.localizedDescription];
 	            } 
 	    }					
 
