@@ -3,7 +3,6 @@
 #import <Cordova/CDV.h>
 
 @interface OutSystemsResources : CDVPlugin {
-  // Member variables go here.
 }
 
 - (void)getFile:(CDVInvokedUrlCommand*)command;
@@ -31,10 +30,11 @@
             NSString *resourcePath = [[NSBundle mainBundle] pathForResource:fileName ofType:fileExt];
             if (resourcePath != nil && [resourcePath length] > 0) {
                 [fileManager copyItemAtPath:resourcePath toPath:docDirFilePath error:&error];
-                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:file];
                 if (error) {
                     NSLog(@"ERROR: Error on copying file: %@\nfrom path: %@\ntoPath: %@", error, resourcePath, docDirFilePath);
                     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.localizedDescription];
+                } else {
+                    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:file];
                 }
             } else {
                 NSLog(@"ERROR: Invalid file name or file already exists");
@@ -45,7 +45,8 @@
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"ERROR: File does not exist"];
         }
     } else {
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+    	NSLog(@"ERROR: Invalid file name");
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"ERROR: File does not exist"];
     }
     
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
