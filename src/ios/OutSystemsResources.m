@@ -38,7 +38,7 @@
 
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:file];
     } else {
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"File name parameter cannot be null or an empty string"];
     }
 
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
