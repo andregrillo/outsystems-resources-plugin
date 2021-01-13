@@ -1,0 +1,27 @@
+{
+  "name": "outsystems-resources-plugin",
+  "version": "0.0.1",
+  "description": "Enables the use of files added as resources in an OutSystems app",
+  "cordova": {
+    "id": "outsystems-resources-plugin",
+    "platforms": [
+      "ios",
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andregrillo/outsystems-resources-plugin.git"
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-ios",
+    "cordova-android"
+  ],
+  "author": "Andre Grillo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/andregrillo/outsystems-resources-plugin/issues"
+  },
+  "homepage": "https://github.com/andregrillo/outsystems-resources-plugin#readme"
+}
