@@ -23,5 +23,11 @@
 		<config-file parent="/*" target="AndroidManifest.xml"></config-file>
 		<source-file src="src/android/OutSystemsResources.java" target-dir="src/outsystems-resources-plugin/OutSystemsResources" />
 		<source-file src="src/android/PendingRequests.java" target-dir="src/outsystems-resources-plugin/OutSystemsResources" />
+		<edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">
+            <application android:requestLegacyExternalStorage="true" />
+        </edit-config>
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+        </config-file>
 	</platform>
 </plugin>
