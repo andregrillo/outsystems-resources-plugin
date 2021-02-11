@@ -1,9 +1,9 @@
 {
-  "name": "outsystems-resources-plugin",
+  "name": "outsystems.resources.plugin",
   "version": "0.0.1",
   "description": "Enables the use of files added as resources in an OutSystems app",
   "cordova": {
-    "id": "outsystems-resources-plugin",
+    "id": "outsystems.resources.plugin",
     "platforms": [
       "ios",
       "android"

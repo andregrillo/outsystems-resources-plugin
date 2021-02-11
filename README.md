@@ -9,3 +9,5 @@ The Documents folder, in the app sandbox, will be the place the files will be co
 ```
 cordova.plugins.OutSystemsResources.getFile("outsystems.png",function(success){},function(error){});
 ```
+
+Android: Under Development
